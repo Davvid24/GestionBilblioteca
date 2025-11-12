@@ -6,17 +6,17 @@ public class Prestamo {
     private int id;
     private Date fechaInicio;
     private Date fechaFin;
-    Usuario usuario;
-    Libro libro;
+    private int idusuario;
+    private int idlibro;
     public Prestamo() {
     }
 
-    public Prestamo(int id, Date fechaInicio, Date fechaFin, Usuario usuario, Libro libro) {
+    public Prestamo(int id, Date fechaInicio, Date fechaFin, int idusuario, int idlibro) {
         this.id = id;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.usuario = usuario;
-        this.libro = libro;
+        this.idusuario = idusuario;
+        this.idlibro = idlibro;
     }
 
     public int getId() {
@@ -43,30 +43,19 @@ public class Prestamo {
         this.fechaFin = fechaFin;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getIdusuario() {
+        return idusuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdusuario(int idusuario) {
+        this.idusuario = idusuario;
     }
 
-    public Libro getLibro() {
-        return libro;
+    public int getIdlibro() {
+        return idlibro;
     }
 
-    public void setLibro(Libro libro) {
-        this.libro = libro;
-    }
-
-    @Override
-    public String toString() {
-        return "Prestamo{" +
-                "id=" + id +
-                ", fechaInicio=" + fechaInicio +
-                ", fechaFin=" + fechaFin +
-                ", usuario=" + usuario +
-                ", libro=" + libro +
-                '}';
+    public void setIdlibro(int idlibro) {
+        this.idlibro = idlibro;
     }
 }
