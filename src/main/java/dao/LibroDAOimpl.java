@@ -32,7 +32,7 @@ public class LibroDAOimpl implements LibroDAO {
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Libro(rs.getInt("id"), rs.getString("titulo")));
+                lista.add(new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("isbn")));
             }
         }
         return lista;
@@ -46,7 +46,7 @@ public class LibroDAOimpl implements LibroDAO {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    return new Libro(rs.getInt("id"), rs.getString("titulo"));
+                    return new Libro(rs.getInt("id"), rs.getString("titulo"), rs.getString("isbn"));
                 }
             }
         }
