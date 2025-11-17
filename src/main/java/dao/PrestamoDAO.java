@@ -8,7 +8,7 @@ import java.util.List;
 public interface PrestamoDAO {
     void anadirPrestamo(Prestamo prestamo) throws Exception;
     void eliminarPrestamo(int id) throws Exception;
-    List<Autor> listarPrestamo() throws Exception;
+    List<Prestamo> listarPrestamo() throws Exception;
     void actualizarPrestamo(Prestamo prestamo) throws Exception;
 
 }
