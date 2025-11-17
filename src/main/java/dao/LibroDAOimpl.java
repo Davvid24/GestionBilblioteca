@@ -19,7 +19,7 @@ public class LibroDAOimpl implements LibroDAO {
                 if (rs.next()) libro.setId(rs.getInt(1));
             }
 
-            System.out.println("DAO: Libro insertado -> " + libro);
+            System.out.println("DAO: Libro insertado: " + libro);
         }
     }
 
@@ -61,7 +61,7 @@ public class LibroDAOimpl implements LibroDAO {
             ps.setString(1, libro.getTitulo());
             ps.setInt(2, libro.getId());
             ps.executeUpdate();
-            System.out.println("DAO: Libro actualizado -> " + libro);
+            System.out.println("DAO: Libro actualizado: " + libro);
         }
     }
 
