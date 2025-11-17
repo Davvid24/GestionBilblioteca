@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/2d99d7d2-420c-432f-aa17-2088fe52bc8c/console.sql" value="2d99d7d2-420c-432f-aa17-2088fe52bc8c" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dao/AutorDAOimpl.java" value="2d99d7d2-420c-432f-aa17-2088fe52bc8c" />
+    <file url="file://$PROJECT_DIR$/src/main/java/dao/LibroDAOimpl.java" value="2d99d7d2-420c-432f-aa17-2088fe52bc8c" />
+  </component>
+</project>
