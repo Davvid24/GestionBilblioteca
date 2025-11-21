@@ -67,12 +67,17 @@ public class LibroDAOimpl implements LibroDAO {
 
     @Override
     public void deleteLibro(int id) throws Exception {
-        String sql = "DELETE FROM libro WHERE id=?";
-        try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
-            ps.executeUpdate();
-            System.out.println("DAO: Libro eliminado (id=" + id + ")");
+        PrestamoDAO prestamoDAOimpl = new PrestamoDAOimpl();
+        if(prestamoDAOimpl.comprobarPrestamosLibros(id)){
+            System.out.println("Hay prestamos asociados a este libro");
+        }else {
+            String sql = "DELETE FROM libro WHERE id=?";
+            try (Connection conn = ConnectionManager.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+                System.out.println("DAO: Libro eliminado (id=" + id + ")");
+            }
         }
     }
 }
