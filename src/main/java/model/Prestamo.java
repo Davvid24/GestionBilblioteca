@@ -58,4 +58,14 @@ public class Prestamo {
     public void setIdlibro(int idlibro) {
         this.idlibro = idlibro;
     }
+
+    @Override
+    public String toString() {
+        return "Prestamo:" +
+                "   -Id: " + id +
+                "   -Fecha inicio: " + fechaInicio +
+                "   -Fecha fin: " + fechaFin +
+                "   -idUsuario: " +  idusuario +
+                "   -idLibro: " + idlibro + "\n";
+    }
 }

@@ -40,7 +40,7 @@ public class Main {
                         
                         """);
                 int opcion = sc.nextInt();
-                sc.nextLine(); // limpiar buffer
+                sc.nextLine();
 
                 switch (opcion) {
                     case 1:
@@ -92,7 +92,7 @@ public class Main {
                         """);
 
                 int opcion = sc.nextInt();
-                sc.nextLine(); // limpiar buffer
+                sc.nextLine();
 
                 switch (opcion) {
                     case 1:
@@ -111,7 +111,7 @@ public class Main {
                         System.out.println(bibliotecaService.listarAutor());
                         System.out.print("Introduce el id del Autor a modificar:");
                         int id = sc.nextInt();
-                        sc.nextLine(); // limpiar buffer
+                        sc.nextLine();
                         System.out.println("Introduce el nuevo Nombre del Autor");
                         nombre = sc.nextLine();
                         bibliotecaService.actualizarAutor(id, nombre);
@@ -121,7 +121,7 @@ public class Main {
                         System.out.println(bibliotecaService.listarAutor());
                         System.out.println("Introduce el id del Autor a eliminar:");
                         id = sc.nextInt();
-                        sc.nextLine(); // limpiar buffer
+                        sc.nextLine();
                         bibliotecaService.eliminaAutor(id);
                         break;
 
@@ -156,7 +156,7 @@ public class Main {
                         """);
 
                 int opcion = sc.nextInt();
-                sc.nextLine(); // limpiar buffer
+                sc.nextLine();
 
                 switch (opcion) {
                     case 1:
@@ -176,10 +176,10 @@ public class Main {
                         break;
 
                     case 3:
-                        bibliotecaService.listarLibros();
+                        System.out.println(bibliotecaService.listarLibros());
                         System.out.print("Introduce el id del libro a cambiar:");
                         int id = sc.nextInt();
-                        sc.nextLine(); // limpiar buffer
+                        sc.nextLine();
                         System.out.println();
 
                         System.out.println("Introduce el nuevo titulo del libro:");
@@ -197,7 +197,7 @@ public class Main {
                         System.out.println(bibliotecaService.listarLibros());
                         System.out.println("Introduce el id del libro a eliminar:");
                         id = sc.nextInt();
-                        sc.nextLine(); // limpiar buffer
+                        sc.nextLine();
                         bibliotecaService.eliminarLibro(id);
                         break;
 
@@ -233,7 +233,7 @@ public class Main {
                         """);
 
                 int opcion = sc.nextInt();
-                sc.nextLine(); // limpiar buffer
+                sc.nextLine();
 
                 switch (opcion) {
                     case 1:
@@ -265,7 +265,7 @@ public class Main {
                         break;
 
                     case 3:
-                        bibliotecaService.listarPrestamos();
+                        System.out.println(bibliotecaService.listarPrestamos());
                         System.out.print("Introduce el id del préstamo a cambiar:");
                         int id = sc.nextInt();
                         sc.nextLine();
@@ -333,7 +333,7 @@ public class Main {
                         """);
 
                 int opcion = sc.nextInt();
-                sc.nextLine(); // limpiar buffer
+                sc.nextLine();
 
                 switch (opcion) {
                     case 1:
@@ -346,7 +346,7 @@ public class Main {
                         break;
 
                     case 2:
-                        bibliotecaService.listarUsuario();
+                        System.out.println(bibliotecaService.listarUsuario());
                         break;
 
                     case 3:

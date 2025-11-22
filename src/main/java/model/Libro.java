@@ -7,7 +7,7 @@ public class Libro {
 
     public Libro() {}
 
-    public Libro(int id, String isbn, String titulo) {
+    public Libro(int id, String titulo, String isbn) {
         this.id = id;
         this.isbn = isbn;
         this.titulo = titulo;
@@ -27,12 +27,12 @@ public class Libro {
         this.isbn = isbn;
     }
 
+
     @Override
     public String toString() {
-        return "Libro{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", isbn='" + isbn + '\'' +
-                '}';
+        return "Libro:" +
+                "   -Id: " + id +
+                "   -Titulo: " + titulo +
+                "   -ISBN: " + isbn + "\n";
     }
 }
