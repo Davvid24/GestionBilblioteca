@@ -10,5 +10,5 @@ public interface UsuarioDAO {
     List<Usuario> listarUsuario() throws Exception;
     Usuario getUsuarioById(int id) throws Exception;
     void actualizarUsuario(Usuario usuario) throws Exception;
-
+    Boolean existeUsuario(Usuario usuario) throws Exception;
 }

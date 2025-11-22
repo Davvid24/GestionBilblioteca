@@ -13,27 +13,31 @@ public class AutorDAOimpl implements AutorDAO {
 
     @Override
     public void anadirAutor(Autor autor) throws Exception {
-        String sql = "insert into Autor (nombre) values (?)";
-        try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, autor.getNombre());
-            ps.executeUpdate();
+        if (existeAutor(autor)) {
+            throw new Exception("Autor ya existente");
+        } else {
+            String sql = "insert into Autor (nombre) values (?)";
+            try (Connection con = ConnectionManager.getConnection();
+                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, autor.getNombre());
+                ps.executeUpdate();
 
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) autor.setId(rs.getInt(1));
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) autor.setId(rs.getInt(1));
+                }
+
+                System.out.println("DAO: Autor insertado -> " + autor);
+
             }
-
-            System.out.println("DAO: Autor insertado -> " + autor);
-
         }
     }
 
     @Override
     public void eliminarAutor(int id) throws Exception {
         Libro_AutorDAO autor = new Libro_AutorDAOimpl();
-        if(autor.comprobarAutorLibros(id)){
+        if (autor.comprobarAutorLibros(id)) {
             System.out.println("El autor tiene libros asociados activos");
-        }else {
+        } else {
             String sql = "delete from Autor where id = ?";
             //Habría que hacer una llamada a Libros, para comprobar que el id que se va a eliminar no este en ningun libro
             try (Connection con = ConnectionManager.getConnection();
@@ -86,6 +90,17 @@ public class AutorDAOimpl implements AutorDAO {
             ps.setInt(2, autor.getId());
             ps.executeUpdate();
             System.out.println("DAO: Autor modificado -> " + autor);
+        }
+    }
+
+    @Override
+    public Boolean existeAutor(Autor autor) throws Exception {
+        String sql = "SELECT * FROM AUTOR WHERE nombre = ?";
+        try (Connection con = ConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, autor.getNombre());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
         }
     }
 }

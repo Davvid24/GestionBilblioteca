@@ -9,23 +9,30 @@ public class LibroDAOimpl implements LibroDAO {
 
     @Override
     public void addLibro(Libro libro) throws Exception {
-        String sql = "INSERT INTO libro (titulo) VALUES (?)";
-        try (Connection conn = ConnectionManager.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, libro.getTitulo());
-            ps.executeUpdate();
+        if (existeLibro(libro)) {
+            throw new Exception("Libro existente");
+        } else {
 
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) libro.setId(rs.getInt(1));
+
+            String sql = "INSERT into libro (titulo, isbn) VALUES (?, ?)";
+            try (Connection conn = ConnectionManager.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, libro.getTitulo());
+                ps.setString(2, libro.getIsbn());
+                ps.executeUpdate();
+
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) libro.setId(rs.getInt(1));
+                }
+
+                System.out.println("DAO: Libro insertado: " + libro);
             }
-
-            System.out.println("DAO: Libro insertado: " + libro);
         }
     }
 
     @Override
     public List<Libro> getAllLibros() throws Exception {
-        String sql = "SELECT id, titulo FROM libro";
+        String sql = "SELECT id, titulo, isbn FROM libro";
         List<Libro> lista = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection();
@@ -40,7 +47,7 @@ public class LibroDAOimpl implements LibroDAO {
 
     @Override
     public Libro getLibroById(int id) throws Exception {
-        String sql = "SELECT id, titulo FROM libro WHERE id = ?";
+        String sql = "SELECT id, titulo, isbn FROM libro WHERE id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -78,6 +85,18 @@ public class LibroDAOimpl implements LibroDAO {
                 ps.executeUpdate();
                 System.out.println("DAO: Libro eliminado (id=" + id + ")");
             }
+        }
+    }
+
+    @Override
+    public Boolean existeLibro(Libro libro) throws Exception {
+        String sql = "SELECT * FROM libro WHERE titulo=? AND isbn=?";
+        try (Connection conn = ConnectionManager.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, libro.getTitulo());
+            ps.setString(2, libro.getIsbn());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
         }
     }
 }

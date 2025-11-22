@@ -10,4 +10,5 @@ public interface LibroDAO {
     Libro getLibroById(int id) throws Exception;
     void updateLibro(Libro libro) throws Exception;
     void deleteLibro(int id) throws Exception;
+    Boolean existeLibro(Libro libro) throws Exception;
 }

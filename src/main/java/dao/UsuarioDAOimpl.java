@@ -13,17 +13,21 @@ public class UsuarioDAOimpl implements UsuarioDAO {
 
     @Override
     public void anadirUsuario(Usuario usuario) throws Exception {
-        String sql = "insert into Usuario (nombre) values (?)";
-        try (Connection con = ConnectionManager.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, usuario.getNombre());
-            ps.executeUpdate();
+        if (existeUsuario(usuario)) {
+            throw new Exception("Usuario existente");
+        } else {
+            String sql = "insert into Usuario (nombre) values (?)";
+            try (Connection con = ConnectionManager.getConnection();
+                 PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, usuario.getNombre());
+                ps.executeUpdate();
 
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) usuario.setNombre(rs.getString(1));
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) usuario.setNombre(rs.getString(1));
+                }
+
+                System.out.println("Usuario insertado: " + usuario);
             }
-
-            System.out.println("Usuario insertado: " + usuario);
         }
     }
 
@@ -86,6 +90,18 @@ public class UsuarioDAOimpl implements UsuarioDAO {
                 if (rs.next()) usuario.setNombre(rs.getString(1));
             }
             System.out.println("Usuario actualizado: " + usuario);
+        }
+    }
+
+
+    @Override
+    public Boolean existeUsuario(Usuario usuario) throws Exception {
+        String sql = "select nombre from Usuario where nombre = ?";
+        try (Connection con = ConnectionManager.getConnection();
+        PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setString(1, usuario.getNombre());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
         }
     }
 }

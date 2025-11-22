@@ -10,5 +10,5 @@ public interface AutorDAO {
     List<Autor> listarAutores() throws Exception;
     Autor getAutorById(int id) throws Exception;
     void actualizarAutor(Autor autor) throws Exception;
-
+    Boolean existeAutor(Autor autor) throws Exception;
 }
