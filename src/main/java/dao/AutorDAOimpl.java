@@ -66,7 +66,7 @@ public class AutorDAOimpl implements AutorDAO {
 
     @Override
     public Autor getAutorById(int id) throws Exception {
-        String sql = "select nombre from autor where id = ?";
+        String sql = "select id, nombre from autor where id = ?";
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
