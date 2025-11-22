@@ -7,11 +7,22 @@ import model.Prestamo;
 import model.Usuario;
 import service.BibliotecaService;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+        try {
+            Connection conexion = ConnectionManager.getConnection();
+        } catch (SQLException e) {
+            System.out.println("Conexion no encontrada");
+            System.exit(0);
+        }
 
         AutorDAO autorDAO = new AutorDAOimpl();
         LibroDAO libroDAO = new LibroDAOimpl();
@@ -34,11 +45,9 @@ public class Main {
                          3. Gestionar Prestamos.
                          4. Gestionar Usuarios.
                          5. Salir.
-                         
+                        \s
                           Introduce el nº de una de estas opciones.
-                        
-                        
-                        """);
+                       \s""");
                 int opcion = sc.nextInt();
                 sc.nextLine();
 
@@ -62,8 +71,21 @@ public class Main {
 
                 }
 
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            } catch (InputMismatchException e) {
+                System.out.println("Dato de entrada inválido.");
+                sc.nextLine();
+            }
+            catch (NoSuchElementException e) {
+                System.out.println("Error al leer, finalizando gestion.");
+                return;
+            }
+            catch (IllegalStateException e) {
+                System.out.println("No ha sido posible capturar la entrada.");
+                return;
+            }catch (NumberFormatException e) {
+                System.out.println("No ha introducido un valor válido.");
+            }catch (Exception e) {
+                System.out.println("Ha ocurrido algún error.");
             }
         }
 
@@ -85,11 +107,9 @@ public class Main {
                          3. Actualizar Autor.
                          4. Eliminar Autor.
                          5. Salir.
-                         
+                        \s
                           Introduce el nº de una de estas opciones.
-                        
-                        
-                        """);
+                       \s""");
 
                 int opcion = sc.nextInt();
                 sc.nextLine();
@@ -149,11 +169,9 @@ public class Main {
                          3. Actualizar Libro.
                          4. Eliminar Libro.
                          5. Salir.
-                         
+                        \s
                           Introduce el nº de una de estas opciones.
-                        
-                        
-                        """);
+                       \s""");
 
                 int opcion = sc.nextInt();
                 sc.nextLine();
@@ -226,11 +244,9 @@ public class Main {
                          3. Actualizar Préstamo.
                          4. Eliminar Préstamo.
                          5. Salir.
-                         
+                        \s
                           Introduce el nº de una de estas opciones.
-                        
-                        
-                        """);
+                       \s""");
 
                 int opcion = sc.nextInt();
                 sc.nextLine();
@@ -326,11 +342,9 @@ public class Main {
                          3. Actualizar Usuario.
                          4. Eliminar Usuario.
                          5. Salir.
-                         
+                        \s
                           Introduce el nº de una de estas opciones.
-                        
-                        
-                        """);
+                       \s""");
 
                 int opcion = sc.nextInt();
                 sc.nextLine();
