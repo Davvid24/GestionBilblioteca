@@ -1,9 +1,13 @@
 package org.example;
 
 import dao.*;
+import model.Autor;
 import model.Libro;
+import model.Prestamo;
+import model.Usuario;
 import service.BibliotecaService;
 
+import java.sql.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -38,23 +42,26 @@ public class Main {
                 switch (opcion) {
                     case 1:
                         //GESTIONAR AUTORES
-
+                        menuAutor(sc, bibliotecaService);
                         break;
                     case 2:
                         //GESTIONAR AUTORES
+                        menuLibro(sc, bibliotecaService);
 
                         break;
                     case 3:
                         //GESTIONAR AUTORES
+                        menuPrestamos(sc, bibliotecaService);
 
                         break;
                     case 4:
                         //GESTIONAR AUTORES
+                        menuUsuarios(sc, bibliotecaService);
 
                         break;
                     case 5:
-                        //GESTIONAR AUTORES
-
+                        System.out.println("Finalizando gestion.");
+                        System.exit(0);
                         break;
 
                 }
@@ -69,7 +76,7 @@ public class Main {
 
     // MENUS
 
-    public void menuAutor(Scanner sc, BibliotecaService bibliotecaService) {
+    public static void menuAutor(Scanner sc, BibliotecaService bibliotecaService) {
         boolean control = true;
         try {
             while (control) {
@@ -91,12 +98,31 @@ public class Main {
                 int opcion = sc.nextInt();
                 switch (opcion) {
                     case 1:
+                        //añadir libro
+                        System.out.println("Introduce los datos del Autor:");
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+                        Autor autor = new Autor(0, nombre);
+                        bibliotecaService.anadirAutor(autor);
+
                         break;
                     case 2:
+                        bibliotecaService.listarAutor();
                         break;
                     case 3:
+                        bibliotecaService.listarLibros();
+                        System.out.print("Introduce el id del Autor a modificar:");
+                        int id = sc.nextInt();
+                        System.out.println();
+                        System.out.println("Introduce el nuevo Nombre del Autor");
+                        nombre = sc.nextLine();
+                        bibliotecaService.actualizarAutor(id, nombre);
                         break;
                     case 4:
+                        bibliotecaService.listarAutor();
+                        System.out.println("Introduce el id del Autor a elimianr:");
+                        id = sc.nextInt();
+                        bibliotecaService.eliminaAutor(id);
                         break;
                     case 5:
                         control = false;
@@ -112,7 +138,7 @@ public class Main {
 
     }
 
-    public void menuLibro(Scanner sc, BibliotecaService bibliotecaService) {
+    public static void menuLibro(Scanner sc, BibliotecaService bibliotecaService) {
         boolean control = true;
         try {
             while (control) {
@@ -137,10 +163,10 @@ public class Main {
                         //añadir libro
                         System.out.println("Introduce los datos del libro:");
                         System.out.print("Título: ");
-                        String titulo = sc.next();
+                        String titulo = sc.nextLine();
                         System.out.println();
                         System.out.print("ISBN: ");
-                        String isbn = sc.next();
+                        String isbn = sc.nextLine();
                         System.out.println();
                         Libro libro = new Libro(0, titulo, isbn);
                         bibliotecaService.anadirLibro(libro);
@@ -150,9 +176,22 @@ public class Main {
                         break;
                     case 3:
                         bibliotecaService.listarLibros();
-
+                        System.out.print("Introduce el id del libro a cambiar:");
+                        int id = sc.nextInt();
+                        System.out.println();
+                        System.out.println("Introduce el nuevo titulo del libro:");
+                        titulo = sc.nextLine();
+                        System.out.println();
+                        System.out.println("Introduce el nuevo isbn del libro:");
+                        isbn = sc.nextLine();
+                        System.out.println();
+                        bibliotecaService.actualizarLibro(id, titulo, isbn);
                         break;
                     case 4:
+                        bibliotecaService.listarLibros();
+                        System.out.println("Introduce el id del libro a elimianr:");
+                        id = sc.nextInt();
+                        bibliotecaService.eliminarLibro(id);
                         break;
                     case 5:
                         control = false;
@@ -168,7 +207,7 @@ public class Main {
 
     }
 
-    public void menuPrestamos(Scanner sc, BibliotecaService bibliotecaService) {
+    public static void menuPrestamos(Scanner sc, BibliotecaService bibliotecaService) {
         boolean control = true;
         try {
             while (control) {
@@ -190,12 +229,54 @@ public class Main {
                 int opcion = sc.nextInt();
                 switch (opcion) {
                     case 1:
+                        //añadir prestamo
+                        System.out.println("Introduce los datos del préstamo:");
+                        System.out.print("Fecha inicio: ");
+                        Date fechaInicio = Date.valueOf(sc.nextLine());
+                        System.out.println();
+                        System.out.print("Fecha Fin: ");
+                        Date fechaFin = Date.valueOf(sc.nextLine());
+                        System.out.println();
+                        System.out.print("Id del Usuario: ");
+                        int idUsuario = sc.nextInt();
+                        System.out.println();
+                        System.out.print("Id del Libro: ");
+                        int idLibro = sc.nextInt();
+                        System.out.println();
+
+                        Prestamo prestamo = new Prestamo(0,  fechaInicio, fechaFin, idUsuario, idLibro);
+                        bibliotecaService.anadirPrestamo(prestamo);
                         break;
                     case 2:
+                        bibliotecaService.listarPrestamos();
                         break;
                     case 3:
+                        bibliotecaService.listarPrestamos();
+                        System.out.print("Introduce el id del préstamo a cambiar:");
+                        int id = sc.nextInt();
+                        System.out.println();
+                        System.out.print("nueva Fecha inicio: ");
+                        fechaInicio = Date.valueOf(sc.nextLine());
+                        System.out.println();
+                        System.out.print("nueva Fecha Fin: ");
+                        fechaFin = Date.valueOf(sc.nextLine());
+                        System.out.println();
+                        System.out.print("Id del nuevo Usuario: ");
+                        idUsuario = sc.nextInt();
+                        System.out.println();
+                        System.out.print("Id del nuevo Libro: ");
+                        idLibro = sc.nextInt();
+                        System.out.println();
+                        prestamo = new Prestamo(id,  fechaInicio, fechaFin, idUsuario, idLibro);
+                        bibliotecaService.actualizarPrestamo(prestamo);
+
+
                         break;
                     case 4:
+                        bibliotecaService.listarPrestamos();
+                        System.out.println("Introduce el id del préstamo a eliminar:");
+                        id = sc.nextInt();
+                        bibliotecaService.eliminarPrestamo(id);
                         break;
                     case 5:
                         control = false;
@@ -211,7 +292,7 @@ public class Main {
 
     }
 
-    public void menuUsuarios(Scanner sc, BibliotecaService bibliotecaService) {
+    public static void menuUsuarios(Scanner sc, BibliotecaService bibliotecaService) {
         boolean control = true;
         try {
             while (control) {
@@ -233,12 +314,32 @@ public class Main {
                 int opcion = sc.nextInt();
                 switch (opcion) {
                     case 1:
+                        //añadir
+                        System.out.println("Introduce el nombre del Usuario:");
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+                        System.out.println();
+                        Usuario usuario = new Usuario(0, nombre);
+                        bibliotecaService.anadirUsuario(usuario);
                         break;
                     case 2:
+                        bibliotecaService.listarUsuario ();
                         break;
                     case 3:
+                        bibliotecaService.listarUsuario();
+                        System.out.print("Introduce el id del Usuario a cambiar:");
+                        int id = sc.nextInt();
+                        System.out.println("Introduce el nuevo Nombre del Usuario:");
+                        nombre = sc.nextLine();
+                        System.out.println();
+
+                        bibliotecaService.actualizarUsuario(id, nombre);
                         break;
                     case 4:
+                        bibliotecaService.listarLibros();
+                        System.out.println("Introduce el id del usuario a eliminar:");
+                        id = sc.nextInt();
+                        bibliotecaService.eliminarUsuario(id);
                         break;
                     case 5:
                         control = false;

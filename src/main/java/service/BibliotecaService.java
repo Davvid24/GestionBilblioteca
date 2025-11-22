@@ -187,6 +187,14 @@ public class BibliotecaService {
             throw new RuntimeException(e);
         }
     }
+    public Prestamo  getPrestamoID(int id){
+        try {
+            return prestamoDao.getPrestamoById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
 
