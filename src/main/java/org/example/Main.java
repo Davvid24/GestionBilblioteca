@@ -108,7 +108,7 @@ public class Main {
                         break;
 
                     case 3:
-                        bibliotecaService.listarAutor();
+                        System.out.println(bibliotecaService.listarAutor());
                         System.out.print("Introduce el id del Autor a modificar:");
                         int id = sc.nextInt();
                         sc.nextLine(); // limpiar buffer
