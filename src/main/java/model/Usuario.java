@@ -49,7 +49,6 @@ public class Usuario {
     public String toString() {
         return "Usuario:" +
                 "   -Id: " + id +
-                "   -Nombre: " + nombre +
-                "   -Libros: " + libros+ "\n";
+                "   -Nombre: " + nombre + "\n";
     }
 }
