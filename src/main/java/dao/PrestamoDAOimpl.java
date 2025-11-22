@@ -46,13 +46,17 @@ public class PrestamoDAOimpl implements PrestamoDAO {
 
     @Override
     public Prestamo getPrestamoById(int id) throws Exception {
-        String sql = "select * from Prestamo where id = ?";
+        String sql = "select id,fechaInicio,fechaFin,usuarioId,libroId from Prestamo where id = ?";
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return new Prestamo(rs.getInt(1), rs.getDate(2), rs.getDate(3), rs.getInt(4), rs.getInt(5));
+                return new Prestamo(rs.getInt("id"),
+                        rs.getDate("fechaInicio"),
+                        rs.getDate("fechaFin"),
+                        rs.getInt("usuarioId"),
+                        rs.getInt("libroId"));
             }
         }
         return null;

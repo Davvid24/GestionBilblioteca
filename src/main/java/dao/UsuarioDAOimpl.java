@@ -64,7 +64,7 @@ public class UsuarioDAOimpl implements UsuarioDAO {
 
     @Override
     public Usuario getUsuarioById(int id) throws Exception {
-        String sql = "select nombre from Usuario where id = ?";
+        String sql = "select id, nombre from Usuario where id = ?";
         try(Connection con = ConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(sql)){
             ps.setInt(1, id);
