@@ -16,7 +16,7 @@ public class AutorDAOimpl implements AutorDAO {
         if (existeAutor(autor)) {
             throw new Exception("Autor ya existente");
         } else {
-            String sql = "insert into Autor (nombre) values (?)";
+            String sql = "insert into autor (nombre) values (?)";
             try (Connection con = ConnectionManager.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, autor.getNombre());
@@ -38,7 +38,7 @@ public class AutorDAOimpl implements AutorDAO {
         if (autor.comprobarAutorLibros(id)) {
             System.out.println("El autor tiene libros asociados activos");
         } else {
-            String sql = "delete from Autor where id = ?";
+            String sql = "delete from autor where id = ?";
             //Habría que hacer una llamada a Libros, para comprobar que el id que se va a eliminar no este en ningun libro
             try (Connection con = ConnectionManager.getConnection();
                  PreparedStatement ps = con.prepareStatement(sql)) {
@@ -53,7 +53,7 @@ public class AutorDAOimpl implements AutorDAO {
     @Override
     public List<Autor> listarAutores() throws Exception {
         List<Autor> autores = new ArrayList<>();
-        String sql = "select * from Autor";
+        String sql = "select * from autor";
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ResultSet rs = ps.executeQuery();
@@ -66,7 +66,7 @@ public class AutorDAOimpl implements AutorDAO {
 
     @Override
     public Autor getAutorById(int id) throws Exception {
-        String sql = "select nombre from Autor where id = ?";
+        String sql = "select nombre from autor where id = ?";
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setInt(1, id);
@@ -83,7 +83,7 @@ public class AutorDAOimpl implements AutorDAO {
 
     @Override
     public void actualizarAutor(Autor autor) throws Exception {
-        String sql = "update Autor set nombre = ? where id = ?";
+        String sql = "update autor set nombre = ? where id = ?";
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, autor.getNombre());
@@ -95,7 +95,7 @@ public class AutorDAOimpl implements AutorDAO {
 
     @Override
     public Boolean existeAutor(Autor autor) throws Exception {
-        String sql = "SELECT * FROM AUTOR WHERE nombre = ?";
+        String sql = "SELECT * FROM autor WHERE nombre = ?";
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, autor.getNombre());
