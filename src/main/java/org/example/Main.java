@@ -104,7 +104,7 @@ public class Main {
                         break;
 
                     case 2:
-                        bibliotecaService.listarAutor();
+                        System.out.println(bibliotecaService.listarAutor());
                         break;
 
                     case 3:
@@ -118,7 +118,7 @@ public class Main {
                         break;
 
                     case 4:
-                        bibliotecaService.listarAutor();
+                        System.out.println(bibliotecaService.listarAutor());
                         System.out.println("Introduce el id del Autor a eliminar:");
                         id = sc.nextInt();
                         sc.nextLine(); // limpiar buffer
@@ -172,7 +172,7 @@ public class Main {
                         break;
 
                     case 2:
-                        bibliotecaService.listarLibros();
+                        System.out.println(bibliotecaService.listarLibros());
                         break;
 
                     case 3:
@@ -194,7 +194,7 @@ public class Main {
                         break;
 
                     case 4:
-                        bibliotecaService.listarLibros();
+                        System.out.println(bibliotecaService.listarLibros());
                         System.out.println("Introduce el id del libro a eliminar:");
                         id = sc.nextInt();
                         sc.nextLine(); // limpiar buffer
@@ -261,7 +261,7 @@ public class Main {
                         break;
 
                     case 2:
-                        bibliotecaService.listarPrestamos();
+                        System.out.println(bibliotecaService.listarPrestamos());
                         break;
 
                     case 3:
@@ -295,7 +295,7 @@ public class Main {
                         break;
 
                     case 4:
-                        bibliotecaService.listarPrestamos();
+                        System.out.println(bibliotecaService.listarPrestamos());
                         System.out.println("Introduce el id del préstamo a eliminar:");
                         id = sc.nextInt();
                         sc.nextLine();
@@ -350,7 +350,7 @@ public class Main {
                         break;
 
                     case 3:
-                        bibliotecaService.listarUsuario();
+                        System.out.println(bibliotecaService.listarUsuario());
                         System.out.print("Introduce el id del Usuario a cambiar:");
                         int id = sc.nextInt();
                         sc.nextLine();
@@ -361,7 +361,7 @@ public class Main {
                         break;
 
                     case 4:
-                        bibliotecaService.listarUsuario();
+                        System.out.println(bibliotecaService.listarUsuario());
                         System.out.println("Introduce el id del usuario a eliminar:");
                         id = sc.nextInt();
                         sc.nextLine();
